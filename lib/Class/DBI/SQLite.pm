@@ -2,11 +2,10 @@ package Class::DBI::SQLite;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.07;
+$VERSION = "0.08";
 
 require Class::DBI;
 use base qw(Class::DBI);
-use SQL::Statement;
 
 sub _auto_increment_value {
     my $self = shift;
@@ -32,28 +31,20 @@ SQL
     $sth->execute($table);
     my($sql) = $sth->fetchrow_array;
     $sth->finish;
-
-    # sri: Needed for auto relationships with Class::DBI::Loader
-    $sql =~ s/REFERENCES\s+\w+//gsi;
-
-    my $parser = SQL::Parser->new('AnyData', { RaiseError => 1});
-    $parser->feature("valid_data_types","TIMESTAMP",1);
-    $parser->parse($sql);
-    my $structure = $parser->structure;
-    my $primary;
-    foreach my $key (keys %{$structure->{column_defs}}) {
-	my $def = $structure->{column_defs}->{$key};
-	next unless $def->{constraints};
-	foreach my $constraint(@{$def->{constraints}}) {
-	    if (uc($constraint) eq 'PRIMARY KEY') {
-		$primary = $key;
-		last;
-	    }
-	}
+    my ($primary) = $sql =~ m/
+    (?:\(|\,) # either a ( to start the definition or a , for next 
+    \s* # maybe some whitespace
+    (\w+) # the col name
+    [^,]* #anything but the end or a ',' for next column
+    PRIMARY\sKEY/sxi;
+    my @mpks;
+    unless ($primary) { 
+        my ($mpks)= $sql =~ m/PRIMARY\s+KEY\s*\(\s*(.+)\s*\)/;
+        @mpks = split m/\s*\,\s*/,$mpks;
     }
     $class->table($table);
     $class->columns(All => @columns);
-    $class->columns(Primary => $primary);
+    $class->columns(Primary => $primary || @mpks);
 }
 
 1;
@@ -84,8 +75,7 @@ Class::DBI::SQLite is an extension to Class::DBI for DBD::SQLite,
 which allows you to populate auto incremented row id after insert.
 
 C<set_up_table> method allows you to automate the setup of columns and
-primary key by using of SQLite PRAGMA statement (with SQL::Statement
-module)
+primary key by using of SQLite PRAGMA statement 
 
 =head1 AUTHOR
 
@@ -98,6 +88,6 @@ it under the same terms as Perl itself.
 
 =head1 SEE ALSO
 
-L<Class::DBI>, L<DBD::SQLite> L<SQL::Statement>
+L<Class::DBI>, L<DBD::SQLite> 
 
 =cut

@@ -1,5 +1,9 @@
 Revision history for Perl extension Class::DBI::SQLite
 
+0.08  Thu Mar 17 18:17:34 JST 2005
+	- Kiss SQL::Parser goodbye
+	  (Markus Ramberg)
+
 0.07  Fri Jan 28 03:02:10 JST 2005
 	- Skip REFERENCES sql clause to bypass SQL::Parser's limitation
 	  (Sebastian Riedel)

@@ -7,7 +7,5 @@ WriteMakefile(
 	'Class::DBI' => 0.85,
 	'Ima::DBI'   => 0.27,
 	'DBD::SQLite' => 0.07,
-	'SQL::Parser' => 1.004,
-	'SQL::Dialects::AnyData' => 0,
     },
 );
