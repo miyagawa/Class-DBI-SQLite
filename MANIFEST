@@ -1,7 +1,9 @@
 Changes
-MANIFEST
-Makefile.PL
 lib/Class/DBI/SQLite.pm
+Makefile.PL
+MANIFEST
+META.yml			Module meta-data (added by MakeMaker)
 t/00_compile.t
 t/01_sqlite.t
+t/02_table.t
 t/lib/Film.pm

@@ -25,8 +25,8 @@ package main;
 
 is(Foo->table, 'foo');
 is(Foo->columns, 3);
-my @columns = Foo->columns('All');
-ok(eq_array(\@columns, [qw(id foo bar)]));
+my @columns = sort Foo->columns('All');
+is_deeply(\@columns, [sort qw(id foo bar)]);
 
 for my $i(1 .. 10) {
     Foo->create({

@@ -7,7 +7,7 @@ use base qw(Class::DBI::SQLite);
 BEGIN {
     my $dir = tempdir( CLEANUP => 1 );
     my($fh, $filename) = tempfile( DIR => $dir );
-    __PACKAGE__->set_db('Main', "dbi:SQLite:dbname=$filename", '', '');
+    __PACKAGE__->set_db('Main', "dbi:SQLite:dbname=$filename", '', '', { AutoCommit => 0 });
 }
 
 __PACKAGE__->table('Movies');
