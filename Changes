@@ -1,4 +1,9 @@
 Revision history for Perl extension Class::DBI::SQLite
 
+0.02  Fri Aug  9 15:59:44 JST 2002
+	- Added tests to see commit() really works (needs Ima::DBI >= 0.27)
+	* Added set_up_table() method
+	  (Thanks to Tomohiro Ikebe <ikebe@cpan.org>)
+
 0.01  Sat Feb 23 22:49:15 2002
 	- original version

@@ -5,6 +5,8 @@ WriteMakefile(
     'PREREQ_PM' => {
 	'Test::More' => 0.32,
 	'Class::DBI' => 0.85,
+	'Ima::DBI'   => 0.27,
 	'DBD::SQLite' => 0.07,
+	'SQL::Parser' => 1.004,
     },
 );

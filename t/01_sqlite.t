@@ -18,6 +18,9 @@ for my $i (1..10) {
     is $film->director, "director-$i";
 }
 
+Film->dbi_commit;
+Film->db_Main->disconnect;
+
 my @movies = Film->retrieve_all;
 is @movies, 10, '10 movies out there';
 

@@ -2,11 +2,14 @@ package Film;
 use strict;
 
 use File::Temp qw(tempdir tempfile);
-my $dir = tempdir( CLEANUP => 1 );
-my($fh, $filename) = tempfile( DIR => $dir );
 
 use base qw(Class::DBI::SQLite);
-__PACKAGE__->set_db('Main', "dbi:SQLite:dbname=$filename", '', '');
+BEGIN {
+    my $dir = tempdir( CLEANUP => 1 );
+    my($fh, $filename) = tempfile( DIR => $dir );
+    __PACKAGE__->set_db('Main', "dbi:SQLite:dbname=$filename", '', '');
+}
+
 __PACKAGE__->table('Movies');
 __PACKAGE__->columns(Primary => qw(id));
 __PACKAGE__->columns(All => qw(id title director));
@@ -22,5 +25,3 @@ CREATE TABLE Movies (
 SQL
     ;
 }
-
-1;
