@@ -1,5 +1,8 @@
 Revision history for Perl extension Class::DBI::SQLite
 
+0.06  Tue Oct 19 16:44:39 JST 2004
+	- Removed debugging statement from the code.
+
 0.05  Tue Oct 19 16:44:39 JST 2004
 	- Fixed error in PRAGMA table_info(?) with newer DBD::SQLite
 	  http://rt.cpan.org/NoAuth/Bug.html?id=7794

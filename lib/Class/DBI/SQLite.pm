@@ -2,7 +2,7 @@ package Class::DBI::SQLite;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.05;
+$VERSION = 0.06;
 
 require Class::DBI;
 use base qw(Class::DBI);
@@ -17,7 +17,6 @@ sub set_up_table {
     my($class, $table) = @_;
 
     # find all columns.
-    warn $table;
     my $sth = $class->db_Main->prepare("PRAGMA table_info('$table')");
     $sth->execute();
     my @columns;
