@@ -2,7 +2,7 @@ package Class::DBI::SQLite;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = 0.06;
+$VERSION = 0.07;
 
 require Class::DBI;
 use base qw(Class::DBI);
@@ -32,6 +32,9 @@ SQL
     $sth->execute($table);
     my($sql) = $sth->fetchrow_array;
     $sth->finish;
+
+    # sri: Needed for auto relationships with Class::DBI::Loader
+    $sql =~ s/REFERENCES\s+\w+//gsi;
 
     my $parser = SQL::Parser->new('AnyData', { RaiseError => 1});
     $parser->feature("valid_data_types","TIMESTAMP",1);
