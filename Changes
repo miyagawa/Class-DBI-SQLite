@@ -1,5 +1,9 @@
 Revision history for Perl extension Class::DBI::SQLite
 
+0.09  Sat Apr 16 05:35:45 JST 2005
+	- Fixed some bugs in Multi PK support
+	  (Thanks to David Naughton)
+
 0.08  Thu Mar 17 18:17:34 JST 2005
 	- Kiss SQL::Parser goodbye
 	  (Markus Ramberg)
