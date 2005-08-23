@@ -2,7 +2,7 @@ package Class::DBI::SQLite;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = "0.09";
+$VERSION = "0.10";
 
 require Class::DBI;
 use base qw(Class::DBI);
@@ -42,7 +42,7 @@ SQL
         @pks = ($primary);
     } else {
         my ($pks)= $sql =~ m/PRIMARY\s+KEY\s*\(\s*([^)]+)\s*\)/;
-        @pks = split m/\s*\,\s*/, $pks;
+        @pks = split(m/\s*\,\s*/, $pks) if $pks;
     }
     $class->table($table);
     $class->columns(Primary => @pks);
