@@ -5,6 +5,8 @@ use Class::DBI::SQLite;
 use DBI;
 use Carp qw( confess );
 
+unlink './t/multi_pk.db' if -e './t/multi_pk.db';
+
 my $dbh = DBI->connect(
     'dbi:SQLite:dbname=./t/multi_pk.db', '', '',
     {

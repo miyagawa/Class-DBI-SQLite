@@ -2,7 +2,7 @@ package Class::DBI::SQLite;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = "0.10";
+$VERSION = "0.11";
 
 require Class::DBI;
 use base qw(Class::DBI);

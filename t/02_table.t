@@ -4,6 +4,8 @@ use Test::More tests => 5;
 use Class::DBI::SQLite;
 use DBI;
 
+unlink './t/table.db' if -e './t/table.db';
+
 my $dbh = DBI->connect(
     'dbi:SQLite:dbname=./t/table.db', '', '',
     {
